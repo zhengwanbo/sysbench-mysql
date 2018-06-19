@@ -16,3 +16,16 @@
     5、cd runtest, then modiry the runParaller_test.sh, config the run test hostname; 
     6、start run sysbench : ./runParaller_test.sh
     7、after finished the test, modify the cexec.sh to config the host, to get the all reports : ./getreport.sh
+
+# for tidb test, 
+    1、sysbench version is: sysbench 1.0.9 (using system LuaJIT 2.0.4)
+    2、cd /usr/share/sysbench
+    3、modify oltp_common.lua,  move create index after create tables. 
+    ```
+      if sysbench.opt.create_secondary then
+        print(string.format("Creating a secondary index on 'sbtest%d'...",
+                          table_num))
+        con:query(string.format("CREATE INDEX k_%d ON sbtest%d(k)",
+                              table_num, table_num))
+      end 
+    ```
