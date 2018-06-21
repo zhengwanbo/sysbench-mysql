@@ -13,7 +13,4 @@ interval=10
 # max time in seconds
 maxtime=600
 
-# just large enough to fit maxtime
-requests=2000000000
-
 driver=mysql

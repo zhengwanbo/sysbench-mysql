@@ -4,8 +4,10 @@ set -x
 
 . ./conf.sh
 
-
-sysbench --test=./lua-tests/db/oltp.lua --db-driver=${driver} --mysql-host=${host} --mysql-port=${port} \
-  --mysql-user=${user} --mysql-password=${password} --mysql-db=${dbname} \
-  --oltp-tables-count=${tcount} cleanup
-
+sysbench --db-driver=${driver} --mysql-host=${host} --mysql-port=${port} \
+ --mysql-user=${user} --mysql-password=${password} --mysql-db=${dbname} \
+ --tables=${tcount} --table-size=${tsize} \
+ --threads=${threads} --report-interval=${interval} \
+ --percentile=95 --time=${maxtime} \
+ --rand-type=uniform \
+ oltp_delete cleanup
